@@ -1,4 +1,4 @@
-# Partking Spot Booking System
+# Parking Spot Booking System
 
 Skład: Wojciech Orłowski, Ariel Michalik  
 Serwer baz danych: mongoDB  
