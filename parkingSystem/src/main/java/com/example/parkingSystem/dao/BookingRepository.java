@@ -9,3 +9,4 @@ import org.springframework.data.jpa.repository.Query;
 public interface BookingRepository extends JpaRepository<Booking, Integer> {
 
 }
+

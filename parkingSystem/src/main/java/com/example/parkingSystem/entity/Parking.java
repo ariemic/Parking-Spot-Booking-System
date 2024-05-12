@@ -27,7 +27,7 @@ public class Parking {
     @Column(name = "max_slots")
     private int maxSlots;
 
-    @OneToMany(mappedBy = "parkingId")
+    @OneToMany(mappedBy = "parking")
     @JsonIgnore
     private List<Booking> bookingList;
 }
