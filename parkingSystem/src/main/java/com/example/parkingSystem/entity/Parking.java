@@ -1,11 +1,11 @@
 package com.example.parkingSystem.entity;
 
-import com.example.parkingSystem.entity.Booking;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.Data;
+import jakarta.validation.constraints.Min;
 
+import jakarta.validation.constraints.Pattern;
+import lombok.Data;
 import java.util.List;
 
 @Entity
@@ -21,10 +21,13 @@ public class Parking {
     @Column(name="coordinates")
     private String coordinates;
 
+    //address like {ul.} Mazowiecka number, city
     @Column(name="address")
+    @Pattern(regexp = "(ul\\. )?\\p{L}+ \\d+, \\p{L}+", message = "enter address as street number, city")
     private String address;
 
     @Column(name = "max_slots")
+    @Min(value = 0, message = "maximum number of slots must be non-negative number")
     private int maxSlots;
 
     @OneToMany(mappedBy = "parkingId")
