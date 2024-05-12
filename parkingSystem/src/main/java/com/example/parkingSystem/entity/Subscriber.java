@@ -41,7 +41,7 @@ public class Subscriber {
     private Integer mainParking;
 
     @Column(name = "all_parkings")
-    private boolean allParkings; //0 - false, 1 - true
+    private boolean allParkings;
 }
 
 
