@@ -15,23 +15,20 @@ public class Booking {
 
     private int bookingId;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REFRESH, CascadeType.DETACH})
-    @JoinColumn(name = "parking_Id")
-    private Parking parking;
+    @Column(name = "parking_Id")
+    private int parkingId;
 
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
-    @JoinColumn(name="car_registration")
-    @JsonIgnore
-    private Subscriber subscriber;
+
+    @Column(name="car_registration")
+    private String subscriberCarRegistration;
 
     @Column(name = "booking_date")
     private String bookingDate;
 
 
-    @JsonIgnore
-    public Parking getParking() {
-        return parking;
+    public int getParkingId() {
+        return parkingId;
     }
 
     public String getBookingDate() {
@@ -42,10 +39,8 @@ public class Booking {
         return bookingId;
     }
 
-
-
-    public Subscriber getSubscriber() {
-        return subscriber;
+    public String getSubscriberCarRegistration() {
+        return subscriberCarRegistration;
     }
 }
 

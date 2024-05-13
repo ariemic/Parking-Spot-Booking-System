@@ -28,20 +28,20 @@ public class DataRestParkingController {
         this.parkingService = parkingService;
     }
 
-    @GetMapping("/getAllAvailableParkingsNow")
-    public ResponseEntity<List<Parking>> getAllAvailableParking() {
-        LocalDate today = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        String formattedDate = today.format(formatter);
-
-        return new ResponseEntity<>(parkingService.listAvailableParkings(formattedDate), HttpStatus.OK);
-    }
-
-
-
-
-    @GetMapping("/getAllAvailableParkings/{date}")
-    public ResponseEntity<List<Parking>> getAllAvailableParking(@PathVariable String date) {
-        return new ResponseEntity<>(parkingService.listAvailableParkings(date), HttpStatus.OK);
-    }
+//    @GetMapping("/getAllAvailableParkingsNow")
+//    public ResponseEntity<List<Parking>> getAllAvailableParking() {
+//        LocalDate today = LocalDate.now();
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//        String formattedDate = today.format(formatter);
+//
+//        return new ResponseEntity<>(parkingService.listAvailableParkings(formattedDate), HttpStatus.OK);
+//    }
+//
+//
+//
+//
+//    @GetMapping("/getAllAvailableParkings/{date}")
+//    public ResponseEntity<List<Parking>> getAllAvailableParking(@PathVariable String date) {
+//        return new ResponseEntity<>(parkingService.listAvailableParkings(date), HttpStatus.OK);
+//    }
 }

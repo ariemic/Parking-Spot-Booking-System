@@ -12,17 +12,16 @@ import java.util.List;
 @Entity
 @Data
 @Table(name = "subscribers")
+
 public class Subscriber {
 
     @Id
     @Column(name = "car_registration", nullable = false)
     @Pattern(regexp = "\\p{L}+ \\d+")
-    private String carRegistrationNumber;
+    private String carRegistration;
 
 
-    @OneToMany(mappedBy = "subscriber")
-    @JsonManagedReference
-    private List<Booking> subscriberBookings;
+
 
 
     @Column(name = "first_name")

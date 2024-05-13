@@ -30,7 +30,5 @@ public class Parking {
     @Min(value = 0, message = "maximum number of slots must be non-negative number")
     private int maxSlots;
 
-    @OneToMany(mappedBy = "parking")
-    @JsonIgnore
-    private List<Booking> bookingList;
+
 }
