@@ -4,6 +4,7 @@ import com.example.parkingSystem.dao.BookingRepository;
 import com.example.parkingSystem.dao.ParkingRepository;
 import com.example.parkingSystem.entity.Booking;
 import com.example.parkingSystem.entity.Parking;
+import com.example.parkingSystem.validation.DateValidaiton;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,35 +29,41 @@ public class ParkingService {
         this.bookingRepository = bookingRepository;
     }
 
-//    public List<Parking> listAvailableParkings(String date){
-//
-//        List<Parking> parkings = parkingRepository.findAll();
-//        List<Booking> bookings = bookingRepository.findAll();
-//
-//
-//        Map<Parking, Integer> parkingMap = new HashMap<>();
-//
-//        for (Parking parking : parkings) {
-//            parkingMap.put(parking, 0);
-//        }
-//        for (Booking booking : bookings) {
-//
-//            if(booking.getBookingDate().equals(date)){
-//                Parking bookedParking = booking.getParking();
-//                parkingMap.put(bookedParking, parkingMap.get(bookedParking) + 1);
-//            }
-//
-//        }
-//        List<Parking> availableParkingsNow = new ArrayList<>();
-//
-//        for(Map.Entry<Parking, Integer> entry: parkingMap.entrySet()){
-//            Parking potentialParking = entry.getKey();
-//            int bookedSlots = entry.getValue();
-//            if(bookedSlots < potentialParking.getMaxSlots()){
-//                availableParkingsNow.add(potentialParking);
-//            }
-//        }
-//        return availableParkingsNow;
-//
-//    }
+
+
+
+
+    public List<Parking> listAvailableParkings(String date){
+
+
+        List<Parking> parkings = parkingRepository.findAll();
+        List<Booking> bookings = bookingRepository.findAll();
+
+
+        Map<Parking, Integer> parkingMap = new HashMap<>();
+
+        for (Parking parking : parkings) {
+            parkingMap.put(parking, 0);
+        }
+        for (Booking booking : bookings) {
+
+            if(booking.getBookingDate().equals(date)){
+                int parkingId = booking.getParkingId();
+                Parking bookedParking = parkingRepository.findByParkingId(parkingId);
+                parkingMap.put(bookedParking, parkingMap.get(bookedParking) + 1);
+            }
+
+        }
+        List<Parking> availableParkingsNow = new ArrayList<>();
+
+        for(Map.Entry<Parking, Integer> entry: parkingMap.entrySet()){
+            Parking potentialParking = entry.getKey();
+            int bookedSlots = entry.getValue();
+            if(bookedSlots < potentialParking.getMaxSlots()){
+                availableParkingsNow.add(potentialParking);
+            }
+        }
+        return availableParkingsNow;
+
+    }
 }
