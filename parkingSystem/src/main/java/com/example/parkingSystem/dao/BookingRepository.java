@@ -7,14 +7,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface BookingRepository extends JpaRepository<Booking, Integer> {
-    Booking findByBookingId(int bookingId);
+    Booking findBookingByBookingId(int id);
 
-    List<Booking> findByParkingId(int parkingId);
-
-    List<Booking> findBySubscriberCarRegistration(String subscriberCarRegistration);
-
-    List<Booking> findByBookingDate(String bookingDate);
 }
 

@@ -3,11 +3,11 @@ package com.example.parkingSystem.validation;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class DateValidaiton {
-    private static DateValidaiton instance;
+public class DateValidation {
+    private static DateValidation instance;
 
 
-    private DateValidaiton() {
+    private DateValidation() {
     }
 
     public boolean validateDate(String date){
@@ -18,9 +18,9 @@ public class DateValidaiton {
         return matcher.matches();
     }
 
-    public static DateValidaiton getInstance(){
+    public static DateValidation getInstance(){
         if(instance == null){
-            instance = new DateValidaiton();
+            instance = new DateValidation();
         }
         return instance;
     }

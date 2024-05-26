@@ -4,10 +4,7 @@ import com.example.parkingSystem.dao.BookingRepository;
 import com.example.parkingSystem.dao.ParkingRepository;
 import com.example.parkingSystem.entity.Booking;
 import com.example.parkingSystem.entity.Parking;
-import com.example.parkingSystem.validation.DateValidaiton;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

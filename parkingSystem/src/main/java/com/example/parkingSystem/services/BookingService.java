@@ -23,7 +23,7 @@ public class BookingService {
 
     public ResponseEntity<Booking> findBookingById(int bookingId){
         try {
-           Booking foundBooking = bookingRepository.findByBookingId(bookingId);
+           Booking foundBooking = bookingRepository.findBookingByBookingId(bookingId);
             if (foundBooking != null) {
                 return ResponseEntity.ok(foundBooking);
             } else {
