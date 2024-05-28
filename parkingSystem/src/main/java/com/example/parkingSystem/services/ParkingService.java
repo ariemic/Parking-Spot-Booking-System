@@ -27,7 +27,9 @@ public class ParkingService {
     }
 
 
-
+    public boolean parkingExist(int parkingId){
+       return parkingRepository.existsById(parkingId);
+    }
 
 
     public List<Parking> listAvailableParkings(String date){

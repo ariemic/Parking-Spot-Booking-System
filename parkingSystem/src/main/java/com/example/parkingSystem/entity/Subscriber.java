@@ -41,6 +41,30 @@ public class Subscriber {
 
     @Column(name = "all_parkings")
     private boolean allParkings;
+
+    public @Pattern(regexp = "\\p{L}+ \\d+") String getCarRegistration() {
+        return carRegistration;
+    }
+
+    public @NotBlank(message = "your name can't be empty") String getFirstName() {
+        return firstName;
+    }
+
+    public @NotBlank(message = "your surname can't be empty") String getLastName() {
+        return lastName;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public Integer getMainParking() {
+        return mainParking;
+    }
+
+    public boolean isAllParkings() {
+        return allParkings;
+    }
 }
 
 

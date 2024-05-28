@@ -9,6 +9,7 @@ import com.example.parkingSystem.validation.DateValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,11 +21,13 @@ import java.util.*;
 @RestController
 public class DataRestParkingController {
     private final ParkingService parkingService;
+    private final ParkingRepository parkingRepository;
 
 
     @Autowired
     public DataRestParkingController(ParkingRepository parkingRepository, BookingRepository bookingRepository, ParkingService parkingService) {
         this.parkingService = parkingService;
+        this.parkingRepository = parkingRepository;
     }
 
     @GetMapping("/getAllAvailableParkingsNow")
@@ -37,7 +40,6 @@ public class DataRestParkingController {
     }
 
 
-
     @GetMapping("/getAllAvailableParkings/{date}")
     public ResponseEntity<?> getAllAvailableParking(@PathVariable String date) {
         DateValidation dateValidation = DateValidation.getInstance();
@@ -48,4 +50,10 @@ public class DataRestParkingController {
         List<Parking> availableParkings = parkingService.listAvailableParkings(date);
         return new ResponseEntity<>(availableParkings, HttpStatus.OK);
     }
+
+
+
+
+
+
 }
