@@ -11,6 +11,6 @@ import java.util.Optional;
 
 public interface BookingRepository extends JpaRepository<Booking, Integer> {
     Booking findBookingByBookingId(int id);
-
+    List<Booking> findBookingBySubscriberCarRegistration(String subscriberCarRegistration);
 }
 
