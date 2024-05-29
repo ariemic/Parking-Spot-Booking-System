@@ -35,20 +35,4 @@ public class DataSubscriberController {
     }
 
 
-
-
-
-    @DeleteMapping("subscribers/{carRegistration}")
-    public ResponseEntity<String> deleteSubscriber(@PathVariable String carRegistration){
-        try{
-            String respone = subscriberService.deleteSubscriber(carRegistration);
-            return ResponseEntity.ok(respone);
-        }
-        catch (SubscriberNotFoundException e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-        } catch(Exception e){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Wystąpił nieoczekwiany błąd");
-        }
-    }
-
 }

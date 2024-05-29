@@ -33,19 +33,14 @@ public class ParkingService {
 
 
     public List<Parking> listAvailableParkings(String date){
-
-
         List<Parking> parkings = parkingRepository.findAll();
         List<Booking> bookings = bookingRepository.findAll();
-
-
         Map<Parking, Integer> parkingMap = new HashMap<>();
 
         for (Parking parking : parkings) {
             parkingMap.put(parking, 0);
         }
         for (Booking booking : bookings) {
-
             if(booking.getBookingDate().equals(date)){
                 int parkingId = booking.getParkingId();
                 Parking bookedParking = parkingRepository.findByParkingId(parkingId);
@@ -54,7 +49,6 @@ public class ParkingService {
 
         }
         List<Parking> availableParkingsNow = new ArrayList<>();
-
         for(Map.Entry<Parking, Integer> entry: parkingMap.entrySet()){
             Parking potentialParking = entry.getKey();
             int bookedSlots = entry.getValue();
