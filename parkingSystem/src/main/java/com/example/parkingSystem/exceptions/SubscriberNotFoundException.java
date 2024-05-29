@@ -1,7 +1,8 @@
 package com.example.parkingSystem.exceptions;
 
-public class SubscriberNotFoundException extends Exception {
+public class SubscriberNotFoundException extends RuntimeException {
     public SubscriberNotFoundException() {
-        super("Nie znaleziono użytwkonika o takim numerze rejestracyjnym");
+        super("Nie znaleziono subskrybenta o podanej rejestracji");
+
     }
 }

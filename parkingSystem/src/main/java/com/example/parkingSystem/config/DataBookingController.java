@@ -41,24 +41,6 @@ public class DataBookingController {
     }
 
 
-//    @PostMapping("/bookings")
-//    public ResponseEntity<String> saveBooking(@Validated @RequestBody List<Booking> bookingsToSave){
-//        try {
-//            for(Booking booking: bookingsToSave){
-//                if(!parkingService.listAvailableParkings(booking.getBookingDate()).contains(booking.getParking())){
-//                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Na parkingu " + booking.getParking().getAddress() + "nie ma już miejsca w ten dzień");
-//                }
-//            }
-//            bookingRepository.saveAll(bookingsToSave);
-//            return ResponseEntity.ok("Pomyślnie zapisano ");
-//        } catch (Exception ex){
-//
-//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Wystąpił błąd walidacji danych" + ex);
-//        }
-//
-//
-//    }
-
     @PostMapping("/bookings")
     public ResponseEntity<String> saveBooking(@Validated @RequestBody Booking bookingToSave) {
         try {
@@ -73,6 +55,7 @@ public class DataBookingController {
         }
 
     }
+
 
 
 

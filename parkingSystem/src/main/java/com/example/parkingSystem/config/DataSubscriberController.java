@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+
 @Controller
 public class DataSubscriberController {
     private final SubscriberRepository subscriberRepository;
@@ -25,6 +26,23 @@ public class DataSubscriberController {
         try{
             String response = subscriberService.deleteSubscriber(carRegistration);
             return ResponseEntity.ok(response);
+        }
+        catch (SubscriberNotFoundException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch(Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Wystąpił nieoczekwiany błąd");
+        }
+    }
+
+
+
+
+
+    @DeleteMapping("subscribers/{carRegistration}")
+    public ResponseEntity<String> deleteSubscriber(@PathVariable String carRegistration){
+        try{
+            String respone = subscriberService.deleteSubscriber(carRegistration);
+            return ResponseEntity.ok(respone);
         }
         catch (SubscriberNotFoundException e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());

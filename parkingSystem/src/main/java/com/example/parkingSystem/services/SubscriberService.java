@@ -16,6 +16,7 @@ import java.util.Optional;
 @Service
 public class SubscriberService {
 
+
     private final SubscriberRepository subscriberRepository;
     private final BookingRepository bookingRepository;
 
@@ -53,9 +54,11 @@ public class SubscriberService {
 
     }
 
-    public String deleteSubscriber(String subscriberCarRegistration) throws SubscriberNotFoundException {
+
+    public String deleteSubscriber(String subscriberCarRegistration){
         if(!subscriberExist(subscriberCarRegistration)){
-            throw new SubscriberNotFoundException();
+           throw new SubscriberNotFoundException();
+
         }
         Optional<Subscriber> subscriberToDelete = subscriberRepository.findById(subscriberCarRegistration);
         Subscriber subscriber = subscriberToDelete.get();
@@ -67,6 +70,7 @@ public class SubscriberService {
         return "Usunięto subskrybenta o rejestracji: " + subscriberCarRegistration + " oraz " + bookingList.toArray().length + " jego rezerwacji";
 
     }
+
 
 
 }
