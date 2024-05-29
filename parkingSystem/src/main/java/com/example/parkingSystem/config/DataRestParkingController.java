@@ -3,13 +3,13 @@ package com.example.parkingSystem.config;
 
 import com.example.parkingSystem.dao.BookingRepository;
 import com.example.parkingSystem.dao.ParkingRepository;
-import com.example.parkingSystem.entity.Booking;
 import com.example.parkingSystem.entity.Parking;
 import com.example.parkingSystem.services.ParkingService;
+import com.example.parkingSystem.validation.DateValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,11 +21,13 @@ import java.util.*;
 @RestController
 public class DataRestParkingController {
     private final ParkingService parkingService;
+    private final ParkingRepository parkingRepository;
 
 
     @Autowired
     public DataRestParkingController(ParkingRepository parkingRepository, BookingRepository bookingRepository, ParkingService parkingService) {
         this.parkingService = parkingService;
+        this.parkingRepository = parkingRepository;
     }
 
     @GetMapping("/getAllAvailableParkingsNow")
@@ -38,10 +40,20 @@ public class DataRestParkingController {
     }
 
 
-
-
     @GetMapping("/getAllAvailableParkings/{date}")
-    public ResponseEntity<List<Parking>> getAllAvailableParking(@PathVariable String date) {
-        return new ResponseEntity<>(parkingService.listAvailableParkings(date), HttpStatus.OK);
+    public ResponseEntity<?> getAllAvailableParking(@PathVariable String date) {
+        DateValidation dateValidation = DateValidation.getInstance();
+        if (!dateValidation.validateDate(date)) {
+            return new ResponseEntity<>("Niepoprawny format daty", HttpStatus.BAD_REQUEST);
+        }
+
+        List<Parking> availableParkings = parkingService.listAvailableParkings(date);
+        return new ResponseEntity<>(availableParkings, HttpStatus.OK);
     }
+
+
+
+
+
+
 }
