@@ -1,7 +1,9 @@
 package com.example.parkingSystem.config;
 
 import com.example.parkingSystem.dao.BookingRepository;
+import com.example.parkingSystem.dao.ParkingRepository;
 import com.example.parkingSystem.entity.Booking;
+import com.example.parkingSystem.entity.Parking;
 import com.example.parkingSystem.services.ParkingService;
 import com.example.parkingSystem.services.SubscriberService;
 import com.example.parkingSystem.validation.DateValidation;
@@ -23,13 +25,15 @@ public class DataBookingController {
     private final BookingRepository bookingRepository;
     private final ParkingService parkingService;
     private final SubscriberService subscriberService;
+    private final ParkingRepository parkingRepository;
 
     @Autowired
     public DataBookingController(BookingRepository bookingRepository, ParkingService parkingService,
-                                 SubscriberService subscriberService) {
+                                 SubscriberService subscriberService, ParkingRepository parkingRepository) {
         this.bookingRepository = bookingRepository;
         this.parkingService = parkingService;
         this.subscriberService = subscriberService;
+        this.parkingRepository = parkingRepository;
     }
 
 
@@ -65,12 +69,15 @@ public class DataBookingController {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nie znaleziono podanego parkingu");
             }
 
+            Parking parking = parkingRepository.findByParkingId(parkingId);
+
             if(!subscriberService.hasLicense(carRegistration, parkingId)){
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Subskrybent o numerze rejestracyjnym" +  carRegistration +
                         "nie posiada licencji na parking: " + parkingId);
             }
-            //TODO tutaj naprawić klucze w hasmapie to nie id parkingu tylko obiekty typu parking
-            if(!parkingService.listAvailableParkings(bookingDate).contains(parkingId)){
+
+            
+            if(!parkingService.listAvailableParkings(bookingDate).contains(parking)){
                 return ResponseEntity.status(HttpStatus.CONFLICT).body("W dniu " + bookingDate +
                         " nie mamy już miejsca na parking " + parkingId);
             }
