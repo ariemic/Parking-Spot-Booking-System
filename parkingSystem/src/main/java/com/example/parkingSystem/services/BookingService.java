@@ -50,11 +50,11 @@ public class BookingService {
         int parkingId = bookingToSave.getParkingId();
         String bookingDate = bookingToSave.getBookingDate();
         if(!subscriberService.subscriberExist(carRegistration)) {
-            throw new SubscriberNotFoundException("Nie znaleziono podanego subskrybenta");
+            throw new SubscriberNotFoundException();
         }
 
         if (!parkingService.parkingExist(parkingId)) {
-            throw new ParkingNotFoundException("Nie znaleziono podanego parkingu");
+            throw new ParkingNotFoundException();
         }
 
         Parking parking = parkingRepository.findByParkingId(parkingId);
