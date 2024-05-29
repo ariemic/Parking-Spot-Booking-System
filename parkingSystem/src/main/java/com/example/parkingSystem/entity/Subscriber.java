@@ -15,13 +15,15 @@ import java.util.List;
 
 public class Subscriber {
 
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private int SubscriberId;
+
+
     @Id
     @Column(name = "car_registration", nullable = false)
-    @Pattern(regexp = "\\p{L}+ \\d+")
+//    @Pattern(regexp = "\\p{L}+ \\d+")
     private String carRegistration;
-
-
-
 
 
     @Column(name = "first_name")
@@ -42,7 +44,7 @@ public class Subscriber {
     @Column(name = "all_parkings")
     private boolean allParkings;
 
-    public @Pattern(regexp = "\\p{L}+ \\d+") String getCarRegistration() {
+    public  String getCarRegistration() {
         return carRegistration;
     }
 

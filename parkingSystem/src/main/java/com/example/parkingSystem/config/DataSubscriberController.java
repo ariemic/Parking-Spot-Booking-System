@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+
 @Controller
 public class DataSubscriberController {
     private final SubscriberRepository subscriberRepository;
@@ -20,6 +21,7 @@ public class DataSubscriberController {
         this.subscriberRepository = subscriberRepository;
         this.subscriberService = subscriberService;
     }
+
 
 
     @DeleteMapping("subscribers/{carRegistration}")
@@ -34,6 +36,8 @@ public class DataSubscriberController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Wystąpił nieoczekwiany błąd");
         }
     }
+
+
 
 
 }
