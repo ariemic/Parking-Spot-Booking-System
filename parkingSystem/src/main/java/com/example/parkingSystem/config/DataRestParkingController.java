@@ -53,36 +53,6 @@ public class DataRestParkingController {
         List<Parking> availableParkings = parkingService.listAvailableParkings(date);
         return new ResponseEntity<>(availableParkings, HttpStatus.OK);
     }
-
-    //todo dodanie przykladow do bazy i sprawdzenie czy logika działą
-    @GetMapping("/getNumberOfFreeSlotsToday/{parkingId}")
-    public ResponseEntity<?> getNumberOfFreeSlots(@PathVariable Integer parkingId){
-        LocalDate today = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        String formattedDate = today.format(formatter);
-        try {
-            if (!parkingService.parkingExist(parkingId)) {
-                throw new ParkingNotFoundException();
-            }
-            return new ResponseEntity<>(parkingService.numberOfFreeSlots(parkingId, formattedDate), HttpStatus.OK);
-        } catch (ParkingNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Wystąpił nieoczekiwany błąd");
-        }
-
-    }
-    @GetMapping("/getNumberOfFreeSlots/{parkingId}/{date}")
-    public ResponseEntity<?> getNumberOfFreeSlots(@PathVariable Integer parkingId, @PathVariable String date){
-        // ------------------------------------------------------------------
-        DateValidation dateValidation = DateValidation.getInstance();
-        if (!dateValidation.validateDate(date)) {
-            return new ResponseEntity<>("Niepoprawny format daty", HttpStatus.BAD_REQUEST);
-        }
-        // ------------------------------------------------------------------
-        return new ResponseEntity<>(parkingService.numberOfFreeSlots(parkingId, date), HttpStatus.OK);
-    }
-
-
+    
 
 }

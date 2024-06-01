@@ -58,15 +58,22 @@ public class ParkingService {
         for(Map.Entry<Parking, Integer> entry: parkingMap.entrySet()){
             Parking potentialParking = entry.getKey();
             int bookedSlots = entry.getValue();
+
             if(bookedSlots < potentialParking.getMaxSlots()){
                 availableParkingsNow.add(potentialParking);
+
+                int freeSlots = potentialParking.getMaxSlots() - bookedSlots;
+                potentialParking.setFreeSlots(freeSlots);
             }
+
+
         }
         return availableParkingsNow;
 
     }
 
-    public int numberOfFreeSlots(int parkingId, String date){
+
+    private int numberOfFreeSlots(int parkingId, String date){
         Map<Parking, Integer> parkingMap = calculateBookedSlots(date);
         Parking parking = parkingRepository.findByParkingId(parkingId);
         int bookedSlots = parkingMap.get(parking);

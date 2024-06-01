@@ -58,8 +58,6 @@ public class DataBookingController {
 
 
 
-
-
     @GetMapping("/bookings")
     public ResponseEntity<List<Booking>> bookingList(){
         List<Booking> bookingList = bookingRepository.findAll();
