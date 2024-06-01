@@ -1,24 +1,20 @@
 package com.example.parkingSystem.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Data
 @Table(name = "subscribers")
 
 public class Subscriber {
-
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private int SubscriberId;
-
 
     @Id
     @Column(name = "car_registration", nullable = false)
@@ -44,10 +40,6 @@ public class Subscriber {
     @Column(name = "all_parkings")
     private boolean allParkings;
 
-    public  String getCarRegistration() {
-        return carRegistration;
-    }
-
     public @NotBlank(message = "your name can't be empty") String getFirstName() {
         return firstName;
     }
@@ -56,9 +48,6 @@ public class Subscriber {
         return lastName;
     }
 
-    public Date getEndDate() {
-        return endDate;
-    }
 
     public Integer getMainParking() {
         return mainParking;
@@ -67,6 +56,9 @@ public class Subscriber {
     public boolean isAllParkings() {
         return allParkings;
     }
+
+
+
 }
 
 

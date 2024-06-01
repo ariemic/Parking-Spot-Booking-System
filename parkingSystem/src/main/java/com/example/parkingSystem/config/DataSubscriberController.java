@@ -2,16 +2,15 @@ package com.example.parkingSystem.config;
 
 
 import com.example.parkingSystem.dao.SubscriberRepository;
+import com.example.parkingSystem.entity.Subscriber;
 import com.example.parkingSystem.exceptions.SubscriberNotFoundException;
 import com.example.parkingSystem.services.SubscriberService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
 
-@Controller
+@RestController
 public class DataSubscriberController {
     private final SubscriberRepository subscriberRepository;
     private final SubscriberService subscriberService;
@@ -34,5 +33,44 @@ public class DataSubscriberController {
         }
     }
 
+    @GetMapping("subscribers/{carRegistration}")
+    public ResponseEntity<?> getSubscriber(@PathVariable String carRegistration){
+        try{
+            Subscriber subscriber = subscriberService.getSubscriber(carRegistration);
+            return ResponseEntity.ok(subscriber);
+        }
+        catch (SubscriberNotFoundException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }catch(Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Wystąpił nieoczekwiany błąd");
+        }
+    }
 
+
+    @PutMapping("subscribers/{carRegistration}")
+    public ResponseEntity<?> putSubscriber(@PathVariable String carRegistration, @RequestBody Subscriber updatedSubscriber){
+        try{
+            Subscriber subscriber = subscriberService.putSubscriber(carRegistration, updatedSubscriber);
+            return ResponseEntity.ok(subscriber);
+        }catch (SubscriberNotFoundException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }catch(Exception e){
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Wystąpił nieoczekwiany błąd");
+        }
+    }
+
+
+    @PatchMapping("subscribers/{carRegistration}")
+    public ResponseEntity<?> patchSubscriber(@PathVariable String carRegistration, @RequestBody Subscriber updatedSubscriber){
+        try{
+            Subscriber subscriber = subscriberService.patchSubscriber(carRegistration, updatedSubscriber);
+            return ResponseEntity.ok(subscriber);
+        }catch (SubscriberNotFoundException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }catch(Exception e){
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Wystąpił nieoczekwiany błąd");
+        }
+    }
 }

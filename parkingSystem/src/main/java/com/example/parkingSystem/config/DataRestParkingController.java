@@ -53,6 +53,6 @@ public class DataRestParkingController {
         List<Parking> availableParkings = parkingService.listAvailableParkings(date);
         return new ResponseEntity<>(availableParkings, HttpStatus.OK);
     }
-    
+
 
 }
