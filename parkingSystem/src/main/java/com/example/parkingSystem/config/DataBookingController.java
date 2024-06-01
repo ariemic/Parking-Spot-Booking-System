@@ -14,14 +14,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 //@Validated
-@Controller
+@RestController
+@RequestMapping("/bookings")
 public class DataBookingController {
     private final BookingRepository bookingRepository;
     private final ParkingService parkingService;
@@ -41,7 +40,7 @@ public class DataBookingController {
     }
 
 
-    @PostMapping("/bookings")
+    @PostMapping()
     public ResponseEntity<String> saveBooking(@Validated @RequestBody Booking bookingToSave) {
         try {
             bookingService.saveBooking(bookingToSave);
@@ -58,7 +57,7 @@ public class DataBookingController {
 
 
 
-    @GetMapping("/bookings")
+    @GetMapping()
     public ResponseEntity<List<Booking>> bookingList(){
         List<Booking> bookingList = bookingRepository.findAll();
         return ResponseEntity.ok(bookingList);

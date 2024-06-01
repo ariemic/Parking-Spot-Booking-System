@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
+@RequestMapping("/subscribers")
 public class DataSubscriberController {
     private final SubscriberRepository subscriberRepository;
     private final SubscriberService subscriberService;
@@ -20,7 +21,7 @@ public class DataSubscriberController {
         this.subscriberRepository = subscriberRepository;
         this.subscriberService = subscriberService;
     }
-    @DeleteMapping("subscribers/{carRegistration}")
+    @DeleteMapping("/{carRegistration}")
     public ResponseEntity<String> deleteSubscriber(@PathVariable String carRegistration){
         try{
             String response = subscriberService.deleteSubscriber(carRegistration);
@@ -33,7 +34,7 @@ public class DataSubscriberController {
         }
     }
 
-    @GetMapping("subscribers/{carRegistration}")
+    @GetMapping("/{carRegistration}")
     public ResponseEntity<?> getSubscriber(@PathVariable String carRegistration){
         try{
             Subscriber subscriber = subscriberService.getSubscriber(carRegistration);
@@ -47,7 +48,7 @@ public class DataSubscriberController {
     }
 
 
-    @PutMapping("subscribers/{carRegistration}")
+    @PutMapping("/{carRegistration}")
     public ResponseEntity<?> putSubscriber(@PathVariable String carRegistration, @RequestBody Subscriber updatedSubscriber){
         try{
             Subscriber subscriber = subscriberService.putSubscriber(carRegistration, updatedSubscriber);
@@ -61,7 +62,7 @@ public class DataSubscriberController {
     }
 
 
-    @PatchMapping("subscribers/{carRegistration}")
+    @PatchMapping("/{carRegistration}")
     public ResponseEntity<?> patchSubscriber(@PathVariable String carRegistration, @RequestBody Subscriber updatedSubscriber){
         try{
             Subscriber subscriber = subscriberService.patchSubscriber(carRegistration, updatedSubscriber);
