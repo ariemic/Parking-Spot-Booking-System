@@ -17,11 +17,8 @@ public class BookingService {
     private final BookingRepository bookingRepository;
     private final ParkingService parkingService;
 
-    // ---------------------------------------------------added --------------------------
     private final SubscriberService subscriberService;
     private final ParkingRepository parkingRepository;
-
-    // ------------------------------------------
 
 
     @Autowired

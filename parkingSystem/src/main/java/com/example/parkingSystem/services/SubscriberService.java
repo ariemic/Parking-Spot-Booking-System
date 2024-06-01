@@ -72,5 +72,52 @@ public class SubscriberService {
     }
 
 
+    public Subscriber getSubscriber(String subscriberCarRegistration){
+        if(!subscriberExist(subscriberCarRegistration)){
+            throw new SubscriberNotFoundException();
+        }
+        Optional<Subscriber> subscriber = subscriberRepository.findById(subscriberCarRegistration);
+        return subscriber.orElseThrow(SubscriberNotFoundException::new);
+    }
+
+
+    public Subscriber putSubscriber(String subscriberCarRegistration, Subscriber newSubscriberData){
+        if(!subscriberExist(subscriberCarRegistration)){
+            throw new SubscriberNotFoundException();
+        }
+
+        return subscriberRepository.findById(subscriberCarRegistration)
+                .map(subscriber -> {
+                    subscriber.setFirstName(newSubscriberData.getFirstName());
+                    subscriber.setLastName(newSubscriberData.getLastName());
+                    subscriber.setMainParking(newSubscriberData.getMainParking());
+                    subscriber.setEndDate(newSubscriberData.getEndDate());
+                    subscriber.setAllParkings(newSubscriberData.isAllParkings());
+                    return subscriberRepository.save(subscriber);
+                }).orElseThrow(SubscriberNotFoundException::new);
+    }
+
+
+    public Subscriber patchSubscriber(String carRegistration, Subscriber newSubscriberData) {
+        return subscriberRepository.findById(carRegistration)
+                .map(subscriber -> {
+                    if (newSubscriberData.getFirstName() != null) {
+                        subscriber.setFirstName(newSubscriberData.getFirstName());
+                    }
+                    if (newSubscriberData.getLastName() != null) {
+                        subscriber.setLastName(newSubscriberData.getLastName());
+                    }
+                    if (newSubscriberData.getEndDate() != null) {
+                        subscriber.setEndDate(newSubscriberData.getEndDate());
+                    }
+                    if (newSubscriberData.getMainParking() != null) {
+                        subscriber.setMainParking(newSubscriberData.getMainParking());
+                    }
+                    subscriber.setAllParkings(newSubscriberData.isAllParkings());
+                    return subscriberRepository.save(subscriber);
+                })
+                .orElseThrow(SubscriberNotFoundException::new);
+    }
+
 
 }

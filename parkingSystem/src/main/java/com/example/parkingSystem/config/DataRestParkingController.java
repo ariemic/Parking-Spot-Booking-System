@@ -4,6 +4,7 @@ package com.example.parkingSystem.config;
 import com.example.parkingSystem.dao.BookingRepository;
 import com.example.parkingSystem.dao.ParkingRepository;
 import com.example.parkingSystem.entity.Parking;
+import com.example.parkingSystem.exceptions.ParkingNotFoundException;
 import com.example.parkingSystem.services.ParkingService;
 import com.example.parkingSystem.validation.DateValidation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,18 +43,16 @@ public class DataRestParkingController {
 
     @GetMapping("/getAllAvailableParkings/{date}")
     public ResponseEntity<?> getAllAvailableParking(@PathVariable String date) {
+        // ------------------------------------------------------------------
         DateValidation dateValidation = DateValidation.getInstance();
         if (!dateValidation.validateDate(date)) {
             return new ResponseEntity<>("Niepoprawny format daty", HttpStatus.BAD_REQUEST);
         }
+        // ------------------------------------------------------------------
 
         List<Parking> availableParkings = parkingService.listAvailableParkings(date);
         return new ResponseEntity<>(availableParkings, HttpStatus.OK);
     }
-
-
-
-
 
 
 }
