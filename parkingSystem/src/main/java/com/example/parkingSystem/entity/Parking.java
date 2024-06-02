@@ -40,4 +40,5 @@ public class Parking {
     public void initFreeSlots() {
         this.freeSlots = this.maxSlots;
     }
+
 }
