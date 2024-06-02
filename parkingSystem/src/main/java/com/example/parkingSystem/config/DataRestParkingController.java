@@ -3,6 +3,7 @@ package com.example.parkingSystem.config;
 
 import com.example.parkingSystem.dao.BookingRepository;
 import com.example.parkingSystem.dao.ParkingRepository;
+import com.example.parkingSystem.dto.ParkingDetails;
 import com.example.parkingSystem.entity.Parking;
 import com.example.parkingSystem.services.ParkingService;
 import com.example.parkingSystem.validation.DateValidation;
@@ -30,7 +31,7 @@ public class DataRestParkingController {
     }
 
     @GetMapping("/getAllAvailableParkingsNow")
-    public ResponseEntity<List<Parking>> getAllAvailableParking() {
+    public ResponseEntity<List<ParkingDetails>> getAllAvailableParking() {
         LocalDate today = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String formattedDate = today.format(formatter);
@@ -46,9 +47,10 @@ public class DataRestParkingController {
         if (!dateValidation.validateDate(date)) {
             return new ResponseEntity<>("Niepoprawny format daty", HttpStatus.BAD_REQUEST);
         }
-        // ------------------------------------------------------------------
+        // --------------------------bookedSlots;
+//                potentialParking.setFreeSlots(freeSlots);----------------------------------------
 
-        List<Parking> availableParkings = parkingService.listAvailableParkings(date);
+        List<ParkingDetails> availableParkings = parkingService.listAvailableParkings(date);
         return new ResponseEntity<>(availableParkings, HttpStatus.OK);
     }
 

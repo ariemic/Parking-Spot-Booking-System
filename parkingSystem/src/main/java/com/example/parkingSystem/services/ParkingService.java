@@ -2,6 +2,7 @@ package com.example.parkingSystem.services;
 
 import com.example.parkingSystem.dao.BookingRepository;
 import com.example.parkingSystem.dao.ParkingRepository;
+import com.example.parkingSystem.dto.ParkingDetails;
 import com.example.parkingSystem.entity.Booking;
 import com.example.parkingSystem.entity.Parking;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,26 +52,23 @@ public class ParkingService {
 
     }
 
-    public List<Parking> listAvailableParkings(String date){
+    public List<ParkingDetails> listAvailableParkings(String date){
         Map<Parking, Integer> parkingMap = calculateBookedSlots(date);
-        List<Parking> availableParkingsNow = new ArrayList<>();
+        List<ParkingDetails> availableParkingsNow = new ArrayList<>();
 
         for(Map.Entry<Parking, Integer> entry: parkingMap.entrySet()){
             Parking potentialParking = entry.getKey();
             int bookedSlots = entry.getValue();
+            int freeSlots = potentialParking.getMaxSlots() - bookedSlots;
+            if(freeSlots > 0){
+                ParkingDetails parkingDetails = new ParkingDetails(potentialParking, freeSlots);
+                availableParkingsNow.add(parkingDetails);
+            }}
 
-            if(bookedSlots < potentialParking.getMaxSlots()){
-                availableParkingsNow.add(potentialParking);
-
-//                int freeSlots = potentialParking.getMaxSlots() - bookedSlots;
-//                potentialParking.setFreeSlots(freeSlots);
-            }
-
-
-        }
         return availableParkingsNow;
-
     }
 
 
 }
+
+
