@@ -1253,24 +1253,29 @@ np. http://localhost:8080/parkings/1
 
 ### Operacje Put
 1. Parkingi\
-   
+![img_12.png](img_12.png)
 2. Rezerwacje\
-   
+![img_16.png](img_16.png)
 3. Subskrybenci\
+![img_19.png](img_19.png)
 
 ### Operacje Patch
 1. Parkingi\
-
+![img_13.png](img_13.png)
 2. Rezerwacje\
-
+![img_10.png](img_10.png)
 3. Subskrybenci\
+![img_11.png](img_11.png)
 
 ### Operacje Delete
 1. Parkingi\
-
+![img_14.png](img_14.png)
+![img_15.png](img_15.png)
 2. Rezerwacje\
-
+![img_17.png](img_17.png)
+3. ![img_18.png](img_18.png)
 3. Subskrybenci\
+![img_20.png](img_20.png)
 
 ## Dane do logowania
 ```properties
