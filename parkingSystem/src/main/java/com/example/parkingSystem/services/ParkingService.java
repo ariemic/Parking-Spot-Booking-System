@@ -77,6 +77,14 @@ public class ParkingService {
         return availableParkingsNow;
     }
 
+    public int numberOfFreeSlots(int parkingId, String date){
+        Map<Parking, Integer> parkingMap = calculateBookedSlots(date);
+        Parking parking = parkingRepository.findByParkingId(parkingId);
+        int bookedSlots = parkingMap.get(parking);
+
+        return parking.getMaxSlots() - bookedSlots;
+    }
+
 
     public List<ParkingSubscribers> listAllParkingSubscribers(String date) {
 

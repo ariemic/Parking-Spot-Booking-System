@@ -57,10 +57,13 @@ public class BookingService {
 
         Parking parking = parkingRepository.findByParkingId(parkingId);
 
+
+
         if (!subscriberService.hasLicense(carRegistration, parkingId)) {
             throw new IllegalStateException("Subskrybent o numerze rejestracyjnym " + carRegistration +
                     " nie posiada licencji na parking: " + parkingId);
         }
+
 
         if (!parkingService.listAvailableParkings(bookingDate).contains(parking)) {
             throw new IllegalStateException("W dniu " + bookingDate +
