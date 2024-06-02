@@ -75,19 +75,6 @@ public class DataRestParkingController {
         }
     }
 
-//    @GetMapping("/parkings")
-//    public List<Parking> getAllParkings() {
-//        List<Parking> parkings = parkingRepository.findAll();
-//        parkings.forEach(Parking::initFreeSlots);
-//        return parkings;
-//    }
-//
-//    @GetMapping("/parkings/{parkingId}")
-//    public Parking getParking(@PathVariable Integer parkingId) {
-//        Parking parking = parkingRepository.findByParkingId(parkingId);
-//        parking.initFreeSlots();
-//        return parking;
-//    }
 
     @GetMapping("/listAllParkingSubscribers/{date}")
     public ResponseEntity<?> listAllParkingSubscribers(@PathVariable String date){
