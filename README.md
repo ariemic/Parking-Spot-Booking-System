@@ -1186,96 +1186,96 @@ public class BookingGeneratorService {
 
 ### Operacje get
 > Uwaga: Daty podaje w formacie RRRR-MM-DD
- 
-1. http://localhost:8080/subscribers 
-   > wyświela wszystkich subksrybentów 
+
+1. http://localhost:8080/subscribers
+   > wyświela wszystkich subksrybentów
 
    <img width="616" alt="obraz" src="https://github.com/ariemic/Parking-Spot-Booking-System/assets/20191221/1e2e0283-232e-4436-b284-6c4c11a9e020">
 
-2. http://localhost:8080/parkings 
-> wyświetla wszystkie dostępne parkingi 
+2. http://localhost:8080/parkings
+> wyświetla wszystkie dostępne parkingi
 
 <img width="664" alt="obraz" src="https://github.com/ariemic/Parking-Spot-Booking-System/assets/20191221/34c1183b-d8f5-4f68-9aaf-4590de5dbf72">
 
 3. http://localhost:8080/bookings
 > wyświetla wszystkie dostępne rezerwacje
 
-![img.png](img.png)
+![img](img/img.png)
 
-4. http://localhost:8080/getAllAvailableParkings/RRRR-MM-DD 
+4. http://localhost:8080/getAllAvailableParkings/RRRR-MM-DD
 > wyświetla parkingi na, które jeszcze jest miejsce na dany dzień
 
 <img width="398" alt="obraz" src="https://github.com/ariemic/Parking-Spot-Booking-System/assets/20191221/8abd4bb7-6851-4cda-8860-61814ab15bfd">
 
 5. http://localhost:8080/getReport/startDate/endDate   
-np. http://localhost:8080/getReport/2024-01-01/2024-12-31
+   np. http://localhost:8080/getReport/2024-01-01/2024-12-31
 > Tworzy raport dla każdego parkingu pomiędzy datą początkową a końcową
 
-![img_1.png](img_1.png)
+![img_1](img/img_1.png)
 
 6. http://localhost:8080/subscribers/carRegistration  
-np. http://localhost:8080/subscribers/ABC123
+   np. http://localhost:8080/subscribers/ABC123
 > wyświetla szczegółowe informację o subskrybencie z podanym numerem rejestracyjnym samochodu
 
-![img_2.png](img_2.png)
+![img_2](img/img_2.png)
 
 7. http://localhost:8080/getAllAvailableParkingsNow
 > wyświetla wszystkie parkingi na których aktualnie są miejsca
 
-![img_3.png](img_3.png)
+![img_3](img/img_3.png)
 
 8. http://localhost:8080/listAllParkingSubscribers/{date}  
-np. http://localhost:8080/listAllParkingSubscribers/2024-06-04
+   np. http://localhost:8080/listAllParkingSubscribers/2024-06-04
 > wyświetla wszystkich subskrybentów którzy mają aktywną subskrypcje na danym parkingu danego dnia
 
-![img_4.png](img_4.png)
+![img_4](img/img_4.png)
 
 9. http://localhost:8080/bookings/number  
-np. http://localhost:8080/bookings/1
+   np. http://localhost:8080/bookings/1
 > wyświela szczegółowe informacje o konkretnej rezerwacji
 
-![img_5.png](img_5.png)
+![img_5](img/img_5.png)
 
 
 10. http://localhost:8080/parkings/number  
-np. http://localhost:8080/parkings/1
+    np. http://localhost:8080/parkings/1
 > wyświela szczegółowe informacje o konkretnym parkingu
 
-![img_6.png](img_6.png)
+![img_6](img/img_6.png)
 
 ### Operacje Post
 1. Parkingi\
-![img_7.png](img_7.png)
+   ![img_7](img/img_7.png)
 2. Rezerwacje\
-![img_8.png](img_8.png)
+   ![img_8](img/img_8.png)
 3. Subskrybenci\
-![img_9.png](img_9.png)
+   ![img_9](img/img_9.png)
 
 ### Operacje Put
 1. Parkingi\
-![img_12.png](img_12.png)
+   ![img_12](img/img_12.png)
 2. Rezerwacje\
-![img_16.png](img_16.png)
+   ![img_16](img/img_16.png)
 3. Subskrybenci\
-![img_19.png](img_19.png)
+   ![img_19](img/img_19.png)
 
 ### Operacje Patch
 1. Parkingi\
-![img_13.png](img_13.png)
+   ![img_13](img/img_13.png)
 2. Rezerwacje\
-![img_10.png](img_10.png)
+   ![img_10](img/img_10.png)
 3. Subskrybenci\
-![img_11.png](img_11.png)
+   ![img_11](img/img_11.png)
 
 ### Operacje Delete
 1. Parkingi\
-![img_14.png](img_14.png)
-![img_15.png](img_15.png)
+   ![img_14](img/img_14.png)
+   ![img_15](img/img_15.png)
 2. Rezerwacje\
-![img_17.png](img_17.png)
-3. ![img_18.png](img_18.png)
+   ![img_17](img/img_17.png)
+3. ![img_18](img/img_18.png)
 3. Subskrybenci\
-![img_20.png](img_20.png)
+   ![img_20](img/img_20.png)
 
 ## Dane do logowania
 ```properties
