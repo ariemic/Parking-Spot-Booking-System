@@ -7,7 +7,6 @@ import com.example.parkingSystem.entity.Subscriber;
 import com.example.parkingSystem.exceptions.SubscriberNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.DeleteMapping;
 
 import java.util.List;
 import java.util.Optional;

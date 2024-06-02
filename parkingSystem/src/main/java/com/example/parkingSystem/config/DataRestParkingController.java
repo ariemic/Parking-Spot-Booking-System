@@ -4,7 +4,6 @@ package com.example.parkingSystem.config;
 import com.example.parkingSystem.dao.BookingRepository;
 import com.example.parkingSystem.dao.ParkingRepository;
 import com.example.parkingSystem.dto.ParkingDetails;
-import com.example.parkingSystem.entity.Parking;
 import com.example.parkingSystem.services.ParkingService;
 import com.example.parkingSystem.validation.DateValidation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,19 +53,7 @@ public class DataRestParkingController {
         return new ResponseEntity<>(availableParkings, HttpStatus.OK);
     }
 
-//    @GetMapping("/parkings")
-//    public List<Parking> getAllParkings() {
-//        List<Parking> parkings = parkingRepository.findAll();
-//        parkings.forEach(Parking::initFreeSlots);
-//        return parkings;
-//    }
-//
-//    @GetMapping("/parkings/{parkingId}")
-//    public Parking getParking(@PathVariable Integer parkingId) {
-//        Parking parking = parkingRepository.findByParkingId(parkingId);
-//        parking.initFreeSlots();
-//        return parking;
-//    }
+
 
 
 
