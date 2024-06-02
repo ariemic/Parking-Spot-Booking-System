@@ -32,12 +32,13 @@ public class Parking {
     @Min(value = 0, message = "maximum number of slots must be non-negative number")
     private int maxSlots;
 
-    @Transient
-    @Min(value = 0, message = "minimum number of slots must be non-negative number")
-    private int freeSlots;
+//    @Transient
+//    @Min(value = 0, message = "minimum number of slots must be non-negative number")
+//    private int freeSlots;
+//
+//    @PrePersist
+//    public void initFreeSlots() {
+//        this.freeSlots = this.maxSlots;
+//    }
 
-    @PrePersist
-    public void initFreeSlots() {
-        this.freeSlots = this.maxSlots;
-    }
 }

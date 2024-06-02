@@ -62,8 +62,8 @@ public class ParkingService {
             if(bookedSlots < potentialParking.getMaxSlots()){
                 availableParkingsNow.add(potentialParking);
 
-                int freeSlots = potentialParking.getMaxSlots() - bookedSlots;
-                potentialParking.setFreeSlots(freeSlots);
+//                int freeSlots = potentialParking.getMaxSlots() - bookedSlots;
+//                potentialParking.setFreeSlots(freeSlots);
             }
 
 
