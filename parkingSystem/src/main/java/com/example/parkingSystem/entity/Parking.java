@@ -6,6 +6,8 @@ import jakarta.validation.constraints.Min;
 
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
+
+import java.security.PrivilegedAction;
 import java.util.List;
 
 @Entity
@@ -34,5 +36,8 @@ public class Parking {
     @Min(value = 0, message = "minimum number of slots must be non-negative number")
     private int freeSlots;
 
-
+    @PrePersist
+    public void initFreeSlots() {
+        this.freeSlots = this.maxSlots;
+    }
 }
