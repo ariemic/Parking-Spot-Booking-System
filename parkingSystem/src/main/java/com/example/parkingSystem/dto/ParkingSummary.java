@@ -12,10 +12,10 @@ public class ParkingSummary {
     private Parking parking;
     private int totalCaluclatedDays;
     private int totalParkedSum;
-    private int AvarageDailyParkedSum;
+    private float AvarageDailyParkedSum;
     private int maxBookedSlots;
-    private int AvarageDailyParkedPercentage;
-    private int maxDailyBookedPercentage;
+    private float AvarageDailyParkedPercentage;
+    private float maxDailyBookedPercentage;
 
     public ParkingSummary(Parking parking) {
         this.parking = parking;
@@ -41,11 +41,11 @@ public class ParkingSummary {
         this.totalParkedSum = totalParkedSum;
     }
 
-    public int getAvarageDailyParkedSum() {
+    public float getAvarageDailyParkedSum() {
         return AvarageDailyParkedSum;
     }
 
-    public void setAvarageDailyParkedSum(int avarageDailyParkedSum) {
+    public void setAvarageDailyParkedSum(float avarageDailyParkedSum) {
         AvarageDailyParkedSum = avarageDailyParkedSum;
     }
 
@@ -57,19 +57,19 @@ public class ParkingSummary {
         this.maxBookedSlots = maxBookedSlots;
     }
 
-    public int getAvarageDailyParkedPercentage() {
+    public float getAvarageDailyParkedPercentage() {
         return AvarageDailyParkedPercentage;
     }
 
-    public void setAvarageDailyParkedPercentage(int avarageDailyParkedPercentage) {
+    public void setAvarageDailyParkedPercentage(float avarageDailyParkedPercentage) {
         AvarageDailyParkedPercentage = avarageDailyParkedPercentage;
     }
 
-    public int getMaxDailyBookedPercentage() {
+    public float getMaxDailyBookedPercentage() {
         return maxDailyBookedPercentage;
     }
 
-    public void setMaxDailyBookedPercentage(int maxDailyBookedPercentage) {
+    public void setMaxDailyBookedPercentage(float maxDailyBookedPercentage) {
         this.maxDailyBookedPercentage = maxDailyBookedPercentage;
     }
 }

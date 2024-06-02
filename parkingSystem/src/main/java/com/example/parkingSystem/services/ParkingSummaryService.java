@@ -31,7 +31,7 @@ public class ParkingSummaryService {
         return b;
     }
 
-    private int[] calculateStats(String date1, String date2, Parking parking){
+    private float[] calculateStats(String date1, String date2, Parking parking){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate startDate = LocalDate.parse(date1, formatter);
         LocalDate endDate = LocalDate.parse(date2, formatter);
@@ -47,14 +47,14 @@ public class ParkingSummaryService {
             days+=1;
 
         }
-        int daily_percentage = 0;
-        int max_daily_percentage = 0;
+        float daily_percentage = 0;
+        float max_daily_percentage = 0;
         if(days!=0 && parking.getMaxSlots()!=0){
-             daily_percentage = booked_counter/(days * parking.getMaxSlots());
-             max_daily_percentage = max_count/parking.getMaxSlots();
+             daily_percentage = (float) booked_counter/(days * parking.getMaxSlots());
+             max_daily_percentage = (float) max_count/parking.getMaxSlots() * 100;
         }
 
-        int[] cntdays = new int[5];
+        float[] cntdays = new float[5];
         cntdays[0] = booked_counter;
         cntdays[1] = days;
         cntdays[2] = max_count;
@@ -76,13 +76,14 @@ public class ParkingSummaryService {
         List<ParkingSummary> parkingSummaries = new LinkedList<>();
         for(Parking parking: listOfParkings){
             ParkingSummary parkingToAdd = new ParkingSummary(parking);
-            int[] cntdays = calculateStats(date1,date2,parking);
-             int bookedCounter = cntdays[0];
-             int days = cntdays[1];
-             int maxBooked = cntdays[2];
-             int dailyPercentage = cntdays[3];
-             int maxDailyPercentage = cntdays[4];
-
+             float[] cntdays = calculateStats(date1,date2,parking);
+             int bookedCounter = (int) cntdays[0];
+             int days = (int) cntdays[1];
+             int maxBooked = (int) cntdays[2];
+             float dailyPercentage = cntdays[3];
+             float maxDailyPercentage = cntdays[4];
+             float avarageDailyParkedSum = (float) bookedCounter/days;
+             parkingToAdd.setAvarageDailyParkedSum(avarageDailyParkedSum);
              parkingToAdd.setTotalParkedSum(bookedCounter);
              parkingToAdd.setTotalCaluclatedDays(days);
              parkingToAdd.setMaxDailyBookedPercentage(maxDailyPercentage);
