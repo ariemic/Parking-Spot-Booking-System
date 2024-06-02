@@ -6,12 +6,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 
 public interface SubscriberRepository extends JpaRepository<Subscriber, String> {
-    @Query("SELECT s FROM Subscriber s WHERE s.endDate > :date")
-    List<Subscriber> findAllByEndDateAfter(@Param("date") Date date);
-
 
 }

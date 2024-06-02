@@ -5,10 +5,12 @@ import lombok.Setter;
 
 import java.util.List;
 
-@Setter
+@Data
 public class ParkingSubscribers {
     private int parkingId;
     private String coordinates;
     private String address;
     private List<SubscriberDto> subscribers;
+
+
 }

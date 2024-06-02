@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Service
@@ -22,14 +24,16 @@ public class ParkingService {
     private ParkingRepository parkingRepository;
     private BookingRepository bookingRepository;
     private final SubscriberRepository subscriberRepository;
+    private final SubscriberService subscriberService;
 
 
     @Autowired
     public ParkingService(ParkingRepository parkingRepository, BookingRepository bookingRepository,
-                          SubscriberRepository subscriberRepository) {
+                          SubscriberRepository subscriberRepository, SubscriberService subscriberService) {
         this.parkingRepository = parkingRepository;
         this.bookingRepository = bookingRepository;
         this.subscriberRepository = subscriberRepository;
+        this.subscriberService = subscriberService;
     }
 
 
@@ -75,15 +79,8 @@ public class ParkingService {
 
 
     public List<ParkingSubscribers> listAllParkingSubscribers(String date) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date convertedDate = null;
-        try {
-            convertedDate = sdf.parse(date);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
-        java.sql.Date sqlDate = new java.sql.Date(convertedDate.getTime());
-        List<Subscriber> subscribers = subscriberRepository.findAllByEndDateAfter(sqlDate);
+
+        List<Subscriber> subscribers = subscriberService.activeLicenseSubscribers(date);
 
         List<Parking> parkings = parkingRepository.findAll();
         List<ParkingSubscribers> parkingSubscribersList = new ArrayList<>();
@@ -95,6 +92,7 @@ public class ParkingService {
             parkingSubscribers.setParkingId(parkingId);
             parkingSubscribers.setCoordinates(parking.getCoordinates());
             parkingSubscribers.setAddress(parking.getAddress());
+
 
             List<SubscriberDto> subscriberDtoList = getSubscriberDtoList(subscribers, parkingId);
             parkingSubscribers.setSubscribers(subscriberDtoList);
