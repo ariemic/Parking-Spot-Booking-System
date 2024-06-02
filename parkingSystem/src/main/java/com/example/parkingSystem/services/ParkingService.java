@@ -77,6 +77,21 @@ public class ParkingService {
         return availableParkingsNow;
     }
 
+    public List<Parking> listAvailableParkingsList(String date){
+        Map<Parking, Integer> parkingMap = calculateBookedSlots(date);
+        List<Parking> availableParkingsNow = new ArrayList<>();
+
+        for(Map.Entry<Parking, Integer> entry: parkingMap.entrySet()){
+            Parking potentialParking = entry.getKey();
+            int bookedSlots = entry.getValue();
+            int freeSlots = potentialParking.getMaxSlots() - bookedSlots;
+            if(freeSlots > 0){
+                availableParkingsNow.add(potentialParking);
+            }}
+
+        return availableParkingsNow;
+    }
+
     public int numberOfFreeSlots(int parkingId, String date){
         Map<Parking, Integer> parkingMap = calculateBookedSlots(date);
         Parking parking = parkingRepository.findByParkingId(parkingId);
@@ -92,6 +107,7 @@ public class ParkingService {
 
         List<Parking> parkings = parkingRepository.findAll();
         List<ParkingSubscribers> parkingSubscribersList = new ArrayList<>();
+
 
         for (Parking parking : parkings) {
             int parkingId = parking.getParkingId();
@@ -117,7 +133,8 @@ public class ParkingService {
             int subscriberMainParking = subscriber.getMainParking();
 
             if(hasAllParkingSubscription || subscriberMainParking == parkingId){
-                SubscriberDto subscriberDto = new SubscriberDto(subscriber.getCarRegistration(), subscriber.getFirstName(), subscriber.getLastName());
+                SubscriberDto subscriberDto = new SubscriberDto(subscriber.getCarRegistration(),
+                        subscriber.getFirstName(), subscriber.getLastName());
                 subscriberDtoList.add(subscriberDto);
             }
         }

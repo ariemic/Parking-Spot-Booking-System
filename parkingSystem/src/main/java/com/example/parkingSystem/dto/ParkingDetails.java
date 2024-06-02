@@ -23,7 +23,7 @@ public class ParkingDetails {
     }
 
     private String calculatePercentageParkingLoad() {
-        double parkingLoad = ((double)(freeSlots) / maxSlots) * 100;
+        double parkingLoad = ((double)(maxSlots - freeSlots) / maxSlots) * 100;
         return String.format("%.0f%%", parkingLoad);
     }
 

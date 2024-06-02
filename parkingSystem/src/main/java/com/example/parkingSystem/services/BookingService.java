@@ -3,14 +3,18 @@ package com.example.parkingSystem.services;
 
 import com.example.parkingSystem.dao.BookingRepository;
 import com.example.parkingSystem.dao.ParkingRepository;
+import com.example.parkingSystem.dao.SubscriberRepository;
 import com.example.parkingSystem.entity.Booking;
 import com.example.parkingSystem.entity.Parking;
+import com.example.parkingSystem.entity.Subscriber;
 import com.example.parkingSystem.exceptions.ParkingNotFoundException;
 import com.example.parkingSystem.exceptions.SubscriberNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class BookingService {
@@ -19,14 +23,16 @@ public class BookingService {
 
     private final SubscriberService subscriberService;
     private final ParkingRepository parkingRepository;
+    private final SubscriberRepository subscriberRepository;
 
 
     @Autowired
-    public BookingService(BookingRepository bookingRepository, ParkingService parkingService, SubscriberService subscriberService, ParkingRepository parkingRepository) {
+    public BookingService(BookingRepository bookingRepository, ParkingService parkingService, SubscriberService subscriberService, ParkingRepository parkingRepository, SubscriberRepository subscriberRepository) {
         this.bookingRepository = bookingRepository;
         this.parkingService = parkingService;
         this.subscriberService = subscriberService;
         this.parkingRepository = parkingRepository;
+        this.subscriberRepository = subscriberRepository;
     }
 
     public ResponseEntity<Booking> findBookingById(int bookingId){
@@ -55,6 +61,9 @@ public class BookingService {
             throw new ParkingNotFoundException();
         }
 
+
+        Optional<Subscriber> optSubscriber = subscriberRepository.findById(carRegistration);
+        Subscriber subscriber =  optSubscriber.get();
         Parking parking = parkingRepository.findByParkingId(parkingId);
 
 
@@ -63,9 +72,12 @@ public class BookingService {
             throw new IllegalStateException("Subskrybent o numerze rejestracyjnym " + carRegistration +
                     " nie posiada licencji na parking: " + parkingId);
         }
+        if(!subscriberService.isSubscriptionActive(subscriber, bookingDate)){
+            throw new IllegalStateException("Subskrybent nie posiada aktywnej subskrypcji na ten dzień");
+        }
 
 
-        if (!parkingService.listAvailableParkings(bookingDate).contains(parking)) {
+        if (!parkingService.listAvailableParkingsList(bookingDate).contains(parking)) {
             throw new IllegalStateException("W dniu " + bookingDate +
                     " nie mamy już miejsca na parking " + parkingId);
         }

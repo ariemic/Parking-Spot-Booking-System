@@ -49,6 +49,19 @@ public class SubscriberService {
         return subscriberRepository.existsById(subscriberCarRegistration);
     }
 
+    public boolean isSubscriptionActive(Subscriber subscriber, String date){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate currentDate = LocalDate.parse(date, formatter);
+        String endDate =  subscriber.getEndDate().toString();
+        endDate = endDate.substring(0,10);
+        LocalDate licenseEnd = LocalDate.parse(endDate, formatter);
+        if(licenseEnd.isAfter(currentDate) || licenseEnd.isEqual(currentDate)){
+           return true;
+        }
+        return false;
+    }
+
+
     public boolean hasLicense(String subscriberCarRegistration, int parkingId){
         Optional<Subscriber> OptionalSubscriber = subscriberRepository.findById(subscriberCarRegistration);
 
@@ -63,6 +76,7 @@ public class SubscriberService {
         if(subscriber.isAllParkings()){
             return true;
         }
+
 
         if(subscriber.getMainParking() == null){
             return false;
