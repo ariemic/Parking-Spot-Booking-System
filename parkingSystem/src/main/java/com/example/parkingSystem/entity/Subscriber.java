@@ -18,7 +18,7 @@ public class Subscriber {
 
     @Id
     @Column(name = "car_registration", nullable = false)
-//    @Pattern(regexp = "\\p{L}+ \\d+")
+    @Pattern(regexp = "\\p{L}+\\d+")
     private String carRegistration;
 
 
