@@ -42,6 +42,7 @@ public class BookingService {
         }
     }
 
+
     public void saveBooking(Booking bookingToSave) throws ParkingNotFoundException, SubscriberNotFoundException{
         String carRegistration = bookingToSave.getSubscriberCarRegistration();
         int parkingId = bookingToSave.getParkingId();

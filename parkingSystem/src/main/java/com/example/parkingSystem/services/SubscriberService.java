@@ -7,10 +7,10 @@ import com.example.parkingSystem.entity.Subscriber;
 import com.example.parkingSystem.exceptions.SubscriberNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.DeleteMapping;
 
-import java.util.List;
-import java.util.Optional;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 
 @Service
@@ -24,6 +24,24 @@ public class SubscriberService {
     public SubscriberService(SubscriberRepository subscriberRepository, BookingRepository bookingRepository) {
         this.subscriberRepository = subscriberRepository;
         this.bookingRepository = bookingRepository;
+    }
+
+    public List<Subscriber> activeLicenseSubscribers(String date){
+        List<Subscriber> allSubscribers = subscriberRepository.findAll();
+        List<Subscriber> activeLicenseSubscribers = new ArrayList<>();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate currentDate = LocalDate.parse(date, formatter);
+        for(Subscriber subscriber: allSubscribers){
+            String endDate =  subscriber.getEndDate().toString();
+            endDate = endDate.substring(0,10);
+            LocalDate licenseEnd = LocalDate.parse(endDate, formatter);
+            if(licenseEnd.isAfter(currentDate) || licenseEnd.isEqual(currentDate)){
+                activeLicenseSubscribers.add(subscriber);
+            }
+        }
+        return activeLicenseSubscribers;
+
     }
 
 

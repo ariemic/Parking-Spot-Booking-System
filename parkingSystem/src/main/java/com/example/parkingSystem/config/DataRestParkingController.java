@@ -3,9 +3,14 @@ package com.example.parkingSystem.config;
 
 import com.example.parkingSystem.dao.BookingRepository;
 import com.example.parkingSystem.dao.ParkingRepository;
+
 import com.example.parkingSystem.dto.ParkingSummary;
 import com.example.parkingSystem.entity.Parking;
 import com.example.parkingSystem.exceptions.WrongDateFormatException;
+
+import com.example.parkingSystem.dto.ParkingDetails;
+import com.example.parkingSystem.dto.ParkingSubscribers;
+
 import com.example.parkingSystem.services.ParkingService;
 import com.example.parkingSystem.services.ParkingSummaryService;
 import com.example.parkingSystem.validation.DateValidation;
@@ -35,7 +40,7 @@ public class DataRestParkingController {
     }
 
     @GetMapping("/getAllAvailableParkingsNow")
-    public ResponseEntity<List<Parking>> getAllAvailableParking() {
+    public ResponseEntity<List<ParkingDetails>> getAllAvailableParking() {
         LocalDate today = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String formattedDate = today.format(formatter);
@@ -46,16 +51,16 @@ public class DataRestParkingController {
 
     @GetMapping("/getAllAvailableParkings/{date}")
     public ResponseEntity<?> getAllAvailableParking(@PathVariable String date) {
-        // ------------------------------------------------------------------
+
         DateValidation dateValidation = DateValidation.getInstance();
         if (!dateValidation.validateDate(date)) {
             return new ResponseEntity<>("Niepoprawny format daty", HttpStatus.BAD_REQUEST);
         }
-        // ------------------------------------------------------------------
 
-        List<Parking> availableParkings = parkingService.listAvailableParkings(date);
+        List<ParkingDetails> availableParkings = parkingService.listAvailableParkings(date);
         return new ResponseEntity<>(availableParkings, HttpStatus.OK);
     }
+
 
     @GetMapping("/getReport/{date1}/{date2}")
     public ResponseEntity<Object> getParkingSummary(@PathVariable String date1, @PathVariable String date2) {
@@ -83,6 +88,20 @@ public class DataRestParkingController {
 //        parking.initFreeSlots();
 //        return parking;
 //    }
+
+    @GetMapping("/listAllParkingSubscribers/{date}")
+    public ResponseEntity<?> listAllParkingSubscribers(@PathVariable String date){
+
+        DateValidation dateValidation = DateValidation.getInstance();
+        if (!dateValidation.validateDate(date)) {
+            return new ResponseEntity<>("Niepoprawny format daty", HttpStatus.BAD_REQUEST);
+        }
+
+        List<ParkingSubscribers> parkingSubscribersList = parkingService.listAllParkingSubscribers(date);
+        return new ResponseEntity<>(parkingSubscribersList, HttpStatus.OK);
+
+    }
+
 
 
 

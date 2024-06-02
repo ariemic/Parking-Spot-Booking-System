@@ -3,7 +3,6 @@ package com.example.parkingSystem.config;
 import com.example.parkingSystem.dao.BookingRepository;
 import com.example.parkingSystem.dao.ParkingRepository;
 import com.example.parkingSystem.entity.Booking;
-import com.example.parkingSystem.entity.Parking;
 import com.example.parkingSystem.exceptions.ParkingNotFoundException;
 import com.example.parkingSystem.exceptions.SubscriberNotFoundException;
 import com.example.parkingSystem.services.BookingService;
@@ -12,7 +11,6 @@ import com.example.parkingSystem.services.SubscriberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
