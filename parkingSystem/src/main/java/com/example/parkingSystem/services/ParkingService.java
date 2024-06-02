@@ -82,11 +82,11 @@ public class ParkingService {
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
+        java.sql.Date sqlDate = new java.sql.Date(convertedDate.getTime());
+        List<Subscriber> subscribers = subscriberRepository.findAllByEndDateAfter(sqlDate);
 
         List<Parking> parkings = parkingRepository.findAll();
         List<ParkingSubscribers> parkingSubscribersList = new ArrayList<>();
-
-        List<Subscriber> subscribers = subscriberRepository.findAllByEndDateAfter((java.sql.Date) convertedDate);
 
         for (Parking parking : parkings) {
             int parkingId = parking.getParkingId();
