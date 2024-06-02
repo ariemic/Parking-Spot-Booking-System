@@ -8,6 +8,7 @@ import com.example.parkingSystem.exceptions.SubscriberNotFoundException;
 import com.example.parkingSystem.services.BookingService;
 import com.example.parkingSystem.services.ParkingService;
 import com.example.parkingSystem.services.SubscriberService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,6 +40,7 @@ public class DataBookingController {
 
 
     @PostMapping()
+    @Transactional
     public ResponseEntity<String> saveBooking(@Validated @RequestBody Booking bookingToSave) {
         try {
             bookingService.saveBooking(bookingToSave);

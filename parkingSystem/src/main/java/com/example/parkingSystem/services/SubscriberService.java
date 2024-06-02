@@ -26,6 +26,7 @@ public class SubscriberService {
         this.bookingRepository = bookingRepository;
     }
 
+
     public List<Subscriber> activeLicenseSubscribers(String date){
         List<Subscriber> allSubscribers = subscriberRepository.findAll();
         List<Subscriber> activeLicenseSubscribers = new ArrayList<>();
