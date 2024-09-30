@@ -1,4 +1,6 @@
 use `parking-system`;
+
+
 SET FOREIGN_KEY_CHECKS=0;
 TRUNCATE TABLE bookings;
 TRUNCATE TABLE parking;
@@ -59,7 +61,4 @@ VALUES
     ('JKL432', 'Marcin', 'Wilk', '2024-09-03', 4, FALSE),
     ('MNO543', 'Iwona', 'Chmielewska', '2024-08-02', 5, TRUE),
     ('PQR654', 'Sebastian', 'Urbaniak', '2024-07-01', 6, FALSE);
-
-
-
 
