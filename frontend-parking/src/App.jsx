@@ -1,11 +1,34 @@
 import { useEffect } from "react";
 import { useState } from "react";
+import ParkingList from "./features/parkings/ParkingList";
 
 function App() {
   const [parkings, setParkings] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // const { coordinates, address, maxSlots} = parking;
+  const removeParking = async (id) => {
+    await fetch(`/parkings/${id}`, {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    }).then(() => {
+      let updatedParkings = [...parkings].filter((p) => p.id !== id);
+      setParkings(updatedParkings);
+    });
+  };
+
+  // const addParking = async => {
+  //   await fetch("/parkings/", {
+  //     method: "POST",
+  //     headers: {
+  //       Accept: "application/json",
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(parking),
+  //   })
+  // }
 
   useEffect(() => {
     setLoading(true);
@@ -34,17 +57,8 @@ function App() {
 
   return (
     <div>
-      <h1>Parkings</h1>
-      <ul>
-        {parkings.map((parking, index) => (
-          <li key={index}>
-            <h2>{parking.address}</h2>
-            <p>Coordinates: {parking.coordinates}</p>
-            <p>Max Slots: {parking.maxSlots}</p>
-            <a href={parking._links.self.href}>View Details</a>
-          </li>
-        ))}
-      </ul>
+      <h1>Parkingi</h1>
+      <ParkingList parkings={parkings} onRemove={removeParking} />
     </div>
   );
 }
