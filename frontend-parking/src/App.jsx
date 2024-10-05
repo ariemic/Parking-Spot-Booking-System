@@ -1,66 +1,30 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ParkingList from "./features/parkings/ParkingList";
 
-function App() {
-  const [parkings, setParkings] = useState([]);
-  const [loading, setLoading] = useState(false);
+import ParkingEditOrAdd from "./features/parkings/ParkingEditOrAdd";
+import AppLayout from "./ui/AppLayout";
+import Error from "./ui/Error";
 
-  const removeParking = async (id) => {
-    await fetch(`/parkings/${id}`, {
-      method: "DELETE",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <AppLayout />,
+    errorElement: <Error />,
+    children: [
+      {
+        path: "parking",
+        element: <ParkingList />,
       },
-    }).then(() => {
-      let updatedParkings = [...parkings].filter((p) => p.id !== id);
-      setParkings(updatedParkings);
-    });
-  };
+      {
+        path: "parking/new",
+        element: <ParkingEditOrAdd />,
+      },
+    ],
+  },
+]);
 
-  // const addParking = async => {
-  //   await fetch("/parkings/", {
-  //     method: "POST",
-  //     headers: {
-  //       Accept: "application/json",
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(parking),
-  //   })
-  // }
-
-  useEffect(() => {
-    setLoading(true);
-
-    fetch("/parkings")
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error("network response is not ok");
-        }
-        return res.json();
-      })
-      .then((data) => {
-        console.log(data);
-        setParkings(data._embedded.parkings);
-
-        setLoading(false);
-      })
-      .catch((err) =>
-        console.error("There is problem with fetching parkings", err)
-      );
-  }, []);
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-  return (
-    <div>
-      <h1>Parkingi</h1>
-      <ParkingList parkings={parkings} onRemove={removeParking} />
-    </div>
-  );
+function App() {
+  return <RouterProvider router={router} />;
 }
 
 export default App;

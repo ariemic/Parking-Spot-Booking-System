@@ -1,12 +1,34 @@
 function Parking({ parking, onRemove }) {
+  // const [parking, setParking] = useState({});
+
+  //   const addParking = async => {
+  //   const response = await fetch("/parkings/", {
+  //     method: "POST",
+  //     body: JSON.stringify(parking)
+  //   })
+  // }
+
   const {
-    coordinates,
-    address,
-    maxSlots,
     _links: {
       self: { href: details },
     },
   } = parking;
+
+  function extractId() {
+    if (!details) return;
+
+    const parts = details.split("/");
+    const id = parts[parts.length - 1];
+    // console.log(id);
+    return id;
+  }
+
+  const parkingWithId = {
+    ...parking,
+    id: extractId(),
+  };
+
+  const { coordinates, address, maxSlots, id } = parkingWithId;
 
   return (
     <li>
@@ -16,7 +38,7 @@ function Parking({ parking, onRemove }) {
       <a href={details} style={{ padding: "20px" }}>
         View Details
       </a>
-      <button onClick={onRemove}>remove</button>
+      <button onClick={() => onRemove(id)}>remove</button>
     </li>
   );
 }
