@@ -8,7 +8,7 @@ function ParkingList() {
 
   const removeParking = async (id) => {
     try {
-      const response = await fetch(`/parkings/${id}`, {
+      const response = await fetch(`/api/parkings/${id}`, {
         method: "DELETE",
         headers: {
           Accept: "application/json",
@@ -33,7 +33,7 @@ function ParkingList() {
   useEffect(() => {
     setLoading(true);
 
-    fetch("/parkings")
+    fetch("/api/parkings")
       .then((res) => {
         if (!res.ok) {
           throw new Error("network response is not ok");

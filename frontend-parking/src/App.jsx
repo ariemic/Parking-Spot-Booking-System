@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
 import ParkingList from "./features/parkings/ParkingList";
 
 import ParkingEditOrAdd from "./features/parkings/ParkingEditOrAdd";
@@ -12,11 +13,11 @@ const router = createBrowserRouter([
     errorElement: <Error />,
     children: [
       {
-        path: "parking",
+        path: "parkings",
         element: <ParkingList />,
       },
       {
-        path: "parking/new",
+        path: "parkings/:id",
         element: <ParkingEditOrAdd />,
       },
     ],

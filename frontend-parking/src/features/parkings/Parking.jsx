@@ -1,13 +1,4 @@
 function Parking({ parking, onRemove }) {
-  // const [parking, setParking] = useState({});
-
-  //   const addParking = async => {
-  //   const response = await fetch("/parkings/", {
-  //     method: "POST",
-  //     body: JSON.stringify(parking)
-  //   })
-  // }
-
   const {
     _links: {
       self: { href: details },
